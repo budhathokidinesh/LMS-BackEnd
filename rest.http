@@ -18,7 +18,16 @@ Content-Type: application/json
     "fName": "Dinesh",
     "lName": "Budhathoki",
     "phone": "123456",
-    "email": "dns@a.com",
+    "email": "physmarika1@gmail.com",
     "password": "123"
    
+}
+
+
+### post to activate user
+POST {{rootURl}}/api/v1/auth/activate-user
+Content-Type: application/json
+
+{
+    "sessionId":"","t":"5111a797-05e5-4565-a8f3-7c5"
 }

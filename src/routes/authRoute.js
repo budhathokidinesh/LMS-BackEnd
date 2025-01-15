@@ -1,8 +1,14 @@
 import express from "express";
-import { insertNewUser } from "../controllers/authController.js";
+import { activateUser, insertNewUser } from "../controllers/authController.js";
+import {
+  newUserDataValidation,
+  userActivationDataValidation,
+} from "../middlewares/validations/authDataValidation.js";
+
 const router = express.Router();
 
-// User siignup
-router.post("/register", insertNewUser);
+// User signup
+router.post("/register", newUserDataValidation, insertNewUser);
+router.post("/activate-user", userActivationDataValidation, activateUser);
 
 export default router;
