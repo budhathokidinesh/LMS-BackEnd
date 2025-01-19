@@ -1,15 +1,20 @@
-import { hashPassword } from "../../utils/bcrypt.js";
+import { comparePassword, hashPassword } from "../../utils/bcrypt.js";
 import { responseClient } from "../middlewares/responseClient.js";
 import {
   createNewSession,
   deleteSession,
 } from "../models/Session/SessionModel.js";
-import { createNewUser, updateUser } from "../models/User/userModel.js";
+import {
+  createNewUser,
+  getUserByEmail,
+  updateUser,
+} from "../models/User/userModel.js";
 import { v4 as uuidv4 } from "uuid";
 import {
   userAccountActivatedNotification,
   userActivationUrlEmail,
 } from "../services/email/emailService.js";
+import { getJwts } from "../../utils/jwt.js";
 
 uuidv4();
 // To insert new user
@@ -91,6 +96,40 @@ export const activateUser = async (req, res, next) => {
     }
     const message = "Invalid link or token expire";
     const statusCode = 400;
+    responseClient({ req, res, message, statusCode });
+  } catch (error) {
+    next(error);
+  }
+};
+export const loginUser = async (req, res, next) => {
+  try {
+    const { email, password } = req.body;
+
+    // get user by email
+    console.log(email, password);
+
+    const user = await getUserByEmail(email);
+    if (user?._id) {
+      console.log(user);
+      //compare password
+      const isPassMatched = comparePassword(password, user.password);
+      if (isPassMatched) {
+        console.log("user authenticated successfully");
+
+        // create JWTS
+        const jwts = await getJwts(email);
+        //response JWTS
+        return responseClient({
+          req,
+          res,
+          message: "Login successfull",
+          payload: jwts,
+        });
+      }
+    }
+
+    const message = "Invalid login details";
+    const statusCode = 401;
     responseClient({ req, res, message, statusCode });
   } catch (error) {
     next(error);

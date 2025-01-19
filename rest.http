@@ -31,3 +31,11 @@ Content-Type: application/json
 {
     "sessionId":"","t":"5111a797-05e5-4565-a8f3-7c5"
 }
+### login user
+POST {{rootURl}}/api/v1/auth/login
+Content-Type: application/json
+
+{
+    "email":"physmarika1@gmail.com",
+    "password":"123"
+}

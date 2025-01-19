@@ -29,3 +29,12 @@ export const userActivationDataValidation = (req, res, next) => {
 
   validateData({ req, res, next, obj });
 };
+export const loginDataValidation = (req, res, next) => {
+  // create schema or rules
+  const obj = {
+    email: EMAIL_REQ,
+    password: PASSWORD_REQ,
+  };
+
+  validateData({ req, res, next, obj });
+};
