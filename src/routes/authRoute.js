@@ -1,4 +1,5 @@
 import express from "express";
+const router = express.Router();
 import {
   activateUser,
   insertNewUser,
@@ -9,8 +10,6 @@ import {
   newUserDataValidation,
   userActivationDataValidation,
 } from "../middlewares/validations/authDataValidation.js";
-
-const router = express.Router();
 
 // User signup
 router.post("/register", newUserDataValidation, insertNewUser);
