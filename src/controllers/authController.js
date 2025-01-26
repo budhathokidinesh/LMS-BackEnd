@@ -2,6 +2,7 @@ import { comparePassword, hashPassword } from "../../utils/bcrypt.js";
 import { responseClient } from "../middlewares/responseClient.js";
 import {
   createNewSession,
+  deleteManySession,
   deleteSession,
 } from "../models/Session/SessionModel.js";
 import {
@@ -131,6 +132,21 @@ export const loginUser = async (req, res, next) => {
     const message = "Invalid login details";
     const statusCode = 401;
     responseClient({ req, res, message, statusCode });
+  } catch (error) {
+    next(error);
+  }
+};
+//this middleware for the logout the user
+export const logoutUser = async (req, res, next) => {
+  try {
+    // get the token
+
+    const { email } = req.userInfo;
+    // update refreshJWT to  ""
+    await updateUser({ email }, { refreshJWT: "" });
+    // remove the acessJWT from session table
+    await deleteManySession({ association: email });
+    responseClient({ req, res, message: "you are logged out!" });
   } catch (error) {
     next(error);
   }
