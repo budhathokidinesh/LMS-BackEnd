@@ -14,5 +14,8 @@ export const PASSWORD_REQ = PASSWORD.required();
 //this for token and session ID
 export const SESSIONID = Joi.string().min(5).max(30);
 export const SESSIONID_REQ = SESSIONID.required();
+
 export const T = Joi.string().min(5).max(30);
 export const T_REQ = Joi.string().min(5).max(30).required();
+
+export const OTP = Joi.number().min(999).max(9999).required();
