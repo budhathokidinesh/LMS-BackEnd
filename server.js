@@ -17,9 +17,11 @@ import authRoute from "./src/routes/authRoute.js";
 import { errorHandler } from "./src/middlewares/errorHandler.js";
 import { responseClient } from "./src/middlewares/responseClient.js";
 import usersRoute from "./src/routes/usersRoute.js";
+import booksRoute from "./src/routes/booksRoute.js";
 
 app.use("/api/v1/auth", authRoute);
 app.use("/api/v1/users", usersRoute);
+app.use("/api/v1/books", booksRoute);
 
 // server status
 app.get("/", (req, res) => {

@@ -67,3 +67,25 @@ Content-Type: application/json
     "password": "1Gaighat123@",
     "otp": 7344
 }
+
+### Book api
+
+### Get book(s)
+GET {{rootURl}}/api/v1/books
+
+
+### Get book(s)
+POST  {{rootURl}}/api/v1/books
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InBoeXNtYXJpa2FAZ21haWwuY29tIiwiaWF0IjoxNzM4NTY4MDE2LCJleHAiOjE3Mzg1Njg5MTZ9.w8xFUPItR1qPs1FPB5fpEoRpkFnfgSfrWnW75qvnoGk
+
+{
+    "title": "dinesh",
+    "year": "1991",
+    "author": "dinesh",
+    "imgUrl": "dinesh",
+    "isbn": "3456781123",
+    "genre": "dinesh",
+    "description": "Book long description"
+   
+}

@@ -4,11 +4,11 @@ const bookSchema = new mongoose.Schema(
   {
     status: {
       type: String,
-      default: inactive,
+      default: "inactive",
     },
     title: {
       type: String,
-      default: inactive,
+      default: "inactive",
     },
     year: {
       type: Number,
@@ -23,7 +23,9 @@ const bookSchema = new mongoose.Schema(
       required: true,
     },
     isbn: {
-      type: String,
+      type: Number,
+      unique: true,
+      index: 1,
       required: true,
     },
     genre: {
@@ -37,7 +39,7 @@ const bookSchema = new mongoose.Schema(
     averageRating: {
       type: Number,
     },
-    adedBy: {
+    addedBy: {
       name: {
         type: String,
       },

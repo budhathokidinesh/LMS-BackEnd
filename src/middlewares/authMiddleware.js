@@ -36,6 +36,23 @@ export const userAuthMiddleware = async (req, res, next) => {
   //   message = decoded === "jwt expired": "Unauthorized";
   responseClient({ req, res, message, statusCode: 401 });
 };
+
+//check the user role admin
+export const adminAuthMiddleware = (req, res, next) => {
+  try {
+    req.userInfo.role === "admin"
+      ? next()
+      : responseClient({
+          req,
+          res,
+          message: "You do not have acccess to this resources",
+          statusCode: 403,
+        });
+  } catch (error) {
+    next(error);
+  }
+};
+
 export const renewAccessJWTMiddleware = async (req, res, next) => {
   const { authorization } = req.headers;
   let message = "Unauthorized";
